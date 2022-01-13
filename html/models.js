@@ -27,17 +27,22 @@ class SlotModel {
         });
         // Add empty "people" slots to fill to max.
         for (let i = this.people.length; i < this.max_people; i++) {
-            $('<div></div>', { "class": "name col-12" }).text("").appendTo(people_list);
+            $('<div></div>', { "class": "name col-12" }).text("--").appendTo(people_list);
         }
         people_list.appendTo(this.rpr);
 
-        if ((this.in_current_week == true) && (this.is_full == false)) {
-            $('<input></input>', {
+        if (this.in_current_week == true) {
+
+            let input = $('<input></input>', {
                 "type": "text",
                 "name": "new-person-d" + this.parent_day_id + "-s" + this.id,
                 "id": "np-d" + this.parent_day_id + "-s" + this.id,
                 "class": "new-person"
-            }).appendTo(this.rpr);
+            })
+
+            if (this.is_full == true) { input.prop('disabled', true); }
+
+            input.appendTo(this.rpr);
         }
 
         return this.rpr;

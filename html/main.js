@@ -5,14 +5,16 @@
 $(document).ready(function() {
     console.log("Populating current week... ");
 
+    let max_people = 5
+
     db.get_current_week((res) => {
-        this.current_week = new WeekModel(res, true);
+        this.current_week = new WeekModel(res, true, max_people);
         this.current_week.getDomRpr().appendTo($("#current-week"));
     });
 
     db.get_previous_weeks((res) => {
-        this.p_week_1 = new WeekModel(res[0], false);
-        this.p_week_2 = new WeekModel(res[1], false);
+        this.p_week_1 = new WeekModel(res[0], false, max_people);
+        this.p_week_2 = new WeekModel(res[1], false, max_people);
 
         this.p_week_1.getDomRpr().appendTo($("#p-week-1"));
         this.p_week_2.getDomRpr().appendTo($("#p-week-2"));
