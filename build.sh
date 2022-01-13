@@ -1,1 +1,1 @@
-docker build -t rafale/resapp
+docker build -t rafale/resapp .
