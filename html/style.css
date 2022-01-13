@@ -1,0 +1,19 @@
+#p-weeks .week {
+    zoom: 60%;
+}
+
+.week {
+    margin: 2rem;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.slot {
+    margin: 0.25rem;
+    border-width: 1px;
+    border-style: solid;
+}
+
+input {
+    margin-bottom: 0.25rem;
+}
