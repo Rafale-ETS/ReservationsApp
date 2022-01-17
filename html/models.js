@@ -16,7 +16,7 @@ class SlotModel {
     getDomRpr() {
         this.rpr = $('<div></div>', {
             "id": "d" + this.parent_day_id + "-s" + this.slot_id,
-            "class": "slot col-12"
+            "class": "slot col-12 border-secondary"
         });
 
         $('<h6></h6>').text("De " + this.start + " à " + this.end).appendTo(this.rpr);
@@ -37,10 +37,15 @@ class SlotModel {
                 "type": "text",
                 "name": "new-person-d" + this.parent_day_id + "-s" + this.id,
                 "id": "np-d" + this.parent_day_id + "-s" + this.id,
-                "class": "new-person"
+                "class": "new-person form-control border-success"
             })
 
-            if (this.is_full == true) { input.prop('disabled', true); }
+            if (this.is_full == true) {
+                input.prop('disabled', true);
+                input.removeClass("border-success")
+                input.addClass("border-secondary")
+                input.addClass("bg-secondary")
+            }
 
             input.appendTo(this.rpr);
         }
@@ -63,7 +68,7 @@ class DayModel {
     getDomRpr() {
         this.rpr = $('<div></div>', {
             "id": "d" + this.id,
-            "class": "day col-sm"
+            "class": "day col-sm border-secondary"
         });
 
         $('<h3></h3>').text(this.date).appendTo(this.rpr);
@@ -79,6 +84,7 @@ class DayModel {
 class WeekModel {
     constructor(week_data, is_current, max_people) {
         this.days = []
+        this.is_current = is_current
 
         week_data["days"].forEach((day_data, day_id) => {
             this.days.push(new DayModel(day_data, day_id, is_current, max_people));
@@ -89,6 +95,12 @@ class WeekModel {
         this.rpr = $('<div></div>', {
             "class": "week col-sm row"
         });
+
+        if (this.is_current) {
+            this.rpr.addClass("border-success")
+        } else {
+            this.rpr.addClass("border-warning")
+        }
 
         this.days.forEach(day => {
             day.getDomRpr().appendTo(this.rpr);
