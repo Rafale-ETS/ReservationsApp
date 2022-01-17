@@ -5,6 +5,7 @@ const luxon = require('luxon');
 const nbr_names_per_slot = 5
 const nbr_working_day = 5;
 const default_slots = [
+    { "start": "09:00", "end": "12:00" },
     { "start": "13:00", "end": "15:00" },
     { "start": "15:00", "end": "17:00" },
     { "start": "18:00", "end": "20:00" }
